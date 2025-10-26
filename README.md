@@ -6,7 +6,7 @@ When deployed, Terraform:
 
 1. Launches an EC2 instance.
 2. Installs and starts Docker within that instance.
-3. Pulls a [pre-built Docker image](https://hub.docker.com/repository/docker/jmicallef9/word-list-generator-ec2/general)
+3. Pulls a pre-built Docker image: `jmicallef9/word-list-generator-ec2:latest`
 4. Runs the container with environment variables pointing to an S3 bucket and input file.
 5. Uploads the generated `.csv` word file back to an `output/` folder in the same S3 bucket.
 
