@@ -29,7 +29,8 @@ resource "aws_instance" "word_list_bucket" {
 				sleep 10
 				sudo -u ec2-user bash -c "
 				docker pull jmicallef9/word-list-generator-ec2:latest &&
-				docker run -e BUCKET_NAME=${var.bucket_name} -e INPUT_KEY=${var.input_key} jmicallef9/word-list-generator-ec2:latest
+				docker run -d --name wordlist-job -e BUCKET_NAME=${var.bucket_name} -e INPUT_KEY=${var.input_key} jmicallef9/word-list-generator-ec2:latest
+				docker logs -f wordlist-job
 				" > /var/log/docker_run.log 2>&1
               EOF
 
