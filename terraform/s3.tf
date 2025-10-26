@@ -24,6 +24,7 @@ resource "terraform_data" "verify_output" {
 
   provisioner "local-exec" {
     command = <<EOF
+      sleep 120
       if aws s3 ls s3://${aws_s3_bucket.ec2_bucket.bucket}/output/; then
         echo "Success! Output files found in S3:"
       else
