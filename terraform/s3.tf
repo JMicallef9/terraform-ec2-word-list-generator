@@ -26,9 +26,9 @@ resource "terraform_data" "verify_output" {
     command = <<EOF
       sleep 120
       if aws s3 ls s3://${aws_s3_bucket.ec2_bucket.bucket}/output/; then
-        echo "Success! Output files found in S3:"
+        echo "Success! Output file found in S3!"
       else
-        echo "Operation failed. No output files found in S3."
+        echo "Operation failed. No output file found in S3."
       fi
     EOF
   }
