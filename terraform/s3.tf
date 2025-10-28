@@ -27,11 +27,13 @@ resource "terraform_data" "verify_output" {
       "echo 'Waiting for output file in S3...'",
       "for i in {1..30}; do",
       "  if aws s3 ls s3://${aws_s3_bucket.ec2_bucket.bucket}/output/; then",
-      "    echo 'Success! Output file found in S3!'; exit 0;",
+      "    echo 'Success! Output file found in S3!' > /tmp/terraform_check.txt",
+      "    exit 0;",
       "  fi",
       "  echo 'Still waiting...'; sleep 10;",
       "done",
-      "echo 'Operation failed. No output file found in S3.'; exit 1"
+      "echo 'Operation failed. No output file found in S3.' > /tmp/terraform_check.txt",
+      "exit 1"
     ]
 
     connection {
