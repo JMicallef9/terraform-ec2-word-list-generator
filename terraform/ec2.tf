@@ -8,7 +8,7 @@ data "aws_ami" "AMI_al2023" {
 		}
 }
 
-resource "aws_instance" "word_list_bucket" {
+resource "aws_instance" "word_list_ec2" {
 	ami = data.aws_ami.AMI_al2023.id
 	instance_type = "t3.micro"
 
@@ -37,6 +37,6 @@ resource "aws_instance" "word_list_bucket" {
 	depends_on = [terraform_data.upload_input]
 
 	tags = {
-		Name = "project_ec2"
+		Name = "word_list_ec2"
 		}
 }
