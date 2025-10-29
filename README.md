@@ -12,6 +12,7 @@ When deployed, Terraform:
 
 ## Prerequisites
 
+- Python
 - Terraform
 - AWS account and credentials configured via `aws configure`
 - A source input file in one of the following file formats: `.txt`, `.srt`, `.md`, `.docx`, `.pdf`, `.epub`
@@ -29,7 +30,13 @@ When deployed, Terraform:
 
 Note: Remember to ensure that your `bucket_name` is globally unique and that it uses only lower case alphanumeric characters and/or hyphens.
 
-4. Apply the configuration using `terraform apply`; confirm with `yes` when prompted.
+4. Run the following commands to create a virtual environment and install relevant dependencies (so that Python can upload the local file to the S3 bucket):
+
+`python -m venv docker/venv`
+`source docker/venv/bin/activate`
+`pip install boto3`
+
+5. Apply the configuration using `terraform apply`; confirm with `yes` when prompted.
 
 Terraform will create the S3 bucket, upload the local input file, launch an EC2 instance, and trigger the Docker container to process your file.
 
