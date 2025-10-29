@@ -43,4 +43,18 @@ resource "terraform_data" "verify_output" {
       host = aws_instance.word_list_ec2.public_ip
     }
   }
+
+  provisioner "local-exec" {
+    command = <<EOT
+      echo "Checking remote status..."
+      scp -i ~/.ssh/access_key.pem ec2-user@${aws_instance.word_list_ec2.public_ip}:/tmp/terraform_check.txt ./terraform_check.txt
+      cat ./terraform_check.txt
+      if grep -q 'Success!' ./terraform_check.txt; then
+        echo "Word list generation completed successfully!"
+      else
+        echo "Job failed - no output file found in S3."
+        exit 1
+      fi
+    EOT
+  }
 }
