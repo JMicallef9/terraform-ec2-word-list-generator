@@ -47,7 +47,7 @@ resource "terraform_data" "verify_output" {
   provisioner "local-exec" {
     command = <<EOT
       echo "Checking remote status..."
-      scp -i ~/.ssh/access_key.pem ec2-user@${aws_instance.word_list_ec2.public_ip}:/tmp/terraform_check.txt ./terraform_check.txt
+      scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/access_key.pem ec2-user@${aws_instance.word_list_ec2.public_ip}:/tmp/terraform_check.txt ./terraform_check.txt
       cat ./terraform_check.txt
       if grep -q 'Success!' ./terraform_check.txt; then
         echo "Word list generation completed successfully!"
