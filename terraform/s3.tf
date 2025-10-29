@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "ec2_bucket" {
 
 resource "terraform_data" "upload_input" {
   provisioner "local-exec" {
-    command = "python script/s3_upload.py"
+    command = "${path.module}/docker/venv/bin/python ${path.module}/script/s3_upload.py"
     environment = {
       BUCKET_NAME = var.bucket_name
       INPUT_KEY = var.input_key
