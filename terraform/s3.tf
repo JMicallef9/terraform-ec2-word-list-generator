@@ -51,8 +51,10 @@ resource "terraform_data" "verify_output" {
       cat ./terraform_check.txt
       if grep -q 'Success!' ./terraform_check.txt; then
         echo "Word list generation completed successfully!"
+        rm -f ./terraform_check.txt
       else
         echo "Job failed - no output file found in S3."
+        rm -f ./terraform_check.txt
         exit 1
       fi
     EOT
