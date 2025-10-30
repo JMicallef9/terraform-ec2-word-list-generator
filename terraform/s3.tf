@@ -27,12 +27,12 @@ resource "terraform_data" "verify_output" {
       "echo 'Waiting for output file in S3...'",
       "for i in {1..30}; do",
       "  if aws s3 ls s3://${aws_s3_bucket.ec2_bucket.bucket}/output/; then",
-      "    echo 'Success! Output file found in S3!' > /tmp/terraform_check.txt",
+      "    echo 'Success! Output file found in S3!'",
       "    exit 0;",
       "  fi",
       "  echo 'Still waiting...'; sleep 10;",
       "done",
-      "echo 'Operation failed. No output file found in S3.' > /tmp/terraform_check.txt",
+      "echo 'Operation failed. No output file found in S3.'",
       "exit 1"
     ]
 
@@ -43,20 +43,18 @@ resource "terraform_data" "verify_output" {
       host = aws_instance.word_list_ec2.public_ip
     }
   }
+}
+
+resource "terraform_data" "end_message" {
+  depends_on = [terraform_data.verify_output]
 
   provisioner "local-exec" {
     command = <<EOT
-      echo "Checking remote status..."
-      scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/access_key.pem ec2-user@${aws_instance.word_list_ec2.public_ip}:/tmp/terraform_check.txt ./terraform_check.txt
-      cat ./terraform_check.txt
-      if grep -q 'Success!' ./terraform_check.txt; then
-        echo "Word list generation completed successfully!"
-        rm -f ./terraform_check.txt
-      else
-        echo "Job failed - no output file found in S3."
-        rm -f ./terraform_check.txt
-        exit 1
-      fi
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      echo "Word list generation completed successfully!"
+      echo "Output available in S3 bucket:"
+      echo "   s3://${aws_s3_bucket.ec2_bucket.bucket}/output/"
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     EOT
   }
 }
