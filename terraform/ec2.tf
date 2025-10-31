@@ -12,7 +12,7 @@ resource "aws_instance" "word_list_ec2" {
 	ami = data.aws_ami.AMI_al2023.id
 	instance_type = "t3.micro"
 
-	key_name = "access_key"
+	key_name = var.key_name
 	vpc_security_group_ids = [aws_security_group.allow-ssh.id]
     subnet_id = aws_subnet.main.id
 
