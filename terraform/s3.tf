@@ -39,7 +39,7 @@ resource "terraform_data" "verify_output" {
     connection {
       type = "ssh"
       user = "ec2-user"
-      private_key =  file(pathexpand(var.local_key_path)) 
+      private_key =  file(local.local_key_path) 
       host = aws_instance.word_list_ec2.public_ip
     }
   }
