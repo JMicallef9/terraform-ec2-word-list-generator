@@ -18,8 +18,12 @@ variable "key_name" {
     type = string
 }
 
-variable "local_key_path" {
+variable "local_key_dir" {
     description = "Path to the local SSH .pem key"
     type = string
-    default = "~.ssh/${var.key_name}.pem"
+    default = "~/.ssh"
+}
+
+locals {
+  local_key_path = pathexpand("${var.local_key_dir}/${var.key_name}.pem")
 }
