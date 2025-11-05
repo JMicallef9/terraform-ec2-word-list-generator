@@ -1,6 +1,6 @@
 # Word List Generator (via Terraform, EC2 and Docker)
 
-This project automates the deployment of an AWS EC2 instance that runs a Dockerised Python application. The application is a simplified and adapted version of the [Word List Generator](https://github.com/JMicallef9/word-list-generator) app. It uploads a text file to an S3 bucket and then generates a word list from that file, storing the word list in the same S3 bucket.
+This project automates the deployment of an AWS EC2 instance that runs a Dockerised Python application. The application is a simplified and adapted version of the [Word List Generator](https://github.com/JMicallef9/word-list-generator) app. It uploads a text file to an S3 bucket and then generates a word list from that file, storing the word list in the same S3 bucket. The Terraform code also triggers a Lambda function to verify and log the result via CloudWatch.
 
 When deployed, Terraform:
 
@@ -51,9 +51,9 @@ After a few minutes, you should see an output file in your S3 bucket:
 You can verify this either by checking manually in the AWS console or via the CLI:
 `aws s3 ls s3://<bucket-name>/output/`
 
-Note that once Terraform has finished applying the configuration, it should run an automatic verification using the CLI command, displaying a message like so: `Success! Output file found in S3!`
+You can also go to the CloudWatch log groups to view the logs.
 
-To verify Docker activity or view the logs, you can SSH into the EC2 instance using your access key and public DNS name:
+To verify Docker activity or view the logs directly, you can SSH into the EC2 instance using your access key and public DNS name:
 `ssh -i ~/.ssh/access_key.pem ec2-user@<public-dns-name>` 
 
 Once connected, you can use `docker ps -a` to check the running/exited containers, or inspect the Docker run logs using `sudo cat /var/log/docker_run.log`
