@@ -5,6 +5,8 @@ resource "aws_lambda_function" "output_notifier" {
   runtime       = "python3.12"
 
   filename = "${path.module}/lambda.zip"
+
+  depends_on = [aws_iam_role_policy_attachment.lambda_logging]
 }
 
 resource "aws_lambda_permission" "allow_s3_trigger" {
