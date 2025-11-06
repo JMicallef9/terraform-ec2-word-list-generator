@@ -17,13 +17,3 @@ variable "key_name" {
     description = "Name of EC2 .pem key"
     type = string
 }
-
-variable "local_key_dir" {
-    description = "Path to the local SSH .pem key"
-    type = string
-    default = "~/.ssh"
-}
-
-locals {
-  local_key_path = pathexpand("${var.local_key_dir}/${var.key_name}.pem")
-}
