@@ -29,7 +29,6 @@ When deployed, Terraform:
 - `local_filepath`: The path to the local file you want to process.
 - `input_key`: The file name to give to your input file in the S3 bucket.
 - `key_name`: The name of your EC2 .pem access key.
-- `local_key_dir`: The directory in which the EC2 .pem access key is located on your local machine.
 
 Note: Remember to ensure that your `bucket_name` is globally unique and that it uses only lower case alphanumeric characters and/or hyphens.
 
