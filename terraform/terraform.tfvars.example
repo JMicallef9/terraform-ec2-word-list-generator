@@ -11,6 +11,3 @@ input_key = "input/sample_input.txt"
 
 # Name of the SSH key (minus .pem suffix)
 key_name = "sample_access_key"
-
-# Directory where the SSH .pem key is located on your local machine
-local_key_dir = "~/.ssh"
