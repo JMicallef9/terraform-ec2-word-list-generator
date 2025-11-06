@@ -3,15 +3,15 @@ variable "bucket_name" {
     type = string
 }
 
-variable "local_filepath" {
-    description = "Local file to upload before EC2 runs"
-    type = string
-}
+# variable "local_filepath" {
+#     description = "Local file to upload before EC2 runs"
+#     type = string
+# }
 
-variable "input_key" {
-    description = "S3 key for uploaded input file"
-    type = string
-}
+# variable "input_key" {
+#     description = "S3 key for uploaded input file"
+#     type = string
+# }
 
 variable "key_name" {
     description = "Name of EC2 .pem key"
