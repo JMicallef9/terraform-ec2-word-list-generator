@@ -26,8 +26,6 @@ When deployed, Terraform:
 
 3. Set the required environment variables by creating a copy of the `terraform.tfvars.example` file and renaming it `terraform.tfvars`. There are three required variables:
 - `bucket_name`: The name of the S3 bucket that stores the input and output files.
-- `local_filepath`: The path to the local file you want to process.
-- `input_key`: The file name to give to your input file in the S3 bucket.
 - `key_name`: The name of your EC2 .pem access key.
 
 Note: Remember to ensure that your `bucket_name` is globally unique and that it uses only lower case alphanumeric characters and/or hyphens.
