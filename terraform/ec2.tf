@@ -34,8 +34,6 @@ resource "aws_instance" "word_list_ec2" {
 				" > /var/log/docker_run.log 2>&1
               EOF
 
-	depends_on = [terraform_data.upload_input]
-
 	tags = {
 		Name = "word_list_ec2"
 		}
