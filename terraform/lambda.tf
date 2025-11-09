@@ -6,7 +6,7 @@ resource "aws_lambda_function" "send_ssm" {
 
   filename = "${path.module}/lambda.zip"
 
-  depends_on = [aws_iam_role_policy_attachment.lambda_logging]
+  depends_on = [aws_iam_role_policy_attachment.lambda_ssm]
 }
 
 resource "aws_lambda_permission" "allow_s3_trigger" {
