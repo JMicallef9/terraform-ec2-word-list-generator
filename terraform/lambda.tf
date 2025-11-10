@@ -6,6 +6,12 @@ resource "aws_lambda_function" "send_ssm" {
 
   filename = "${path.module}/lambda.zip"
 
+  environment {
+    variables = {
+        EC2_INSTANCE_ID = aws_instance.word_list_ec2.id
+    }
+  }
+
   depends_on = [aws_iam_role_policy_attachment.lambda_ssm]
 }
 
