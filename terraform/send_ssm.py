@@ -2,15 +2,15 @@ import json
 import boto3
 import os
 
-def lambda_handler(event, context):
+ssm_client = boto3.client("ssm")
 
-    ssm_client = boto3.client("ssm") # inside or outside function?
+def lambda_handler(event, context):
 
     record = event['Records'][0]
     bucket = record['s3']['bucket']['name']
     key = record['s3']['object']['key']
 
-    ec2_instance_id = os.environ['EC2_INSTANCE_ID'] # set env variable?
+    ec2_instance_id = os.environ['EC2_INSTANCE_ID']
 
     command = f"docker run jmicallef9/word-list-generator-ec2:latest process s3://{bucket}{key}" # use process?
 
