@@ -3,11 +3,5 @@
 # Name for the S3 bucket that will hold input/output files
 bucket_name = "example-wordlist-bucket"
 
-# Path to the local file you want uploaded to S3 before the EC2 runs
-local_filepath = "./data/sample_input.txt"
-
-# S3 key to assign to the uploaded input file - how it will appear in your bucket
-input_key = "input/sample_input.txt"
-
 # Name of the SSH key (minus .pem suffix)
 key_name = "sample_access_key"
